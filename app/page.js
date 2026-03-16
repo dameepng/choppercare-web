@@ -6,12 +6,12 @@ const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://choppercare.toeanmuda.id";
 
 const QUICK_QUESTIONS = [
-  "Apa yang harus dilakukan saat gempa bumi?",
-  "Cara mempersiapkan tas siaga bencana?",
-  "Tanda-tanda tsunami akan datang?",
-  "Kontak darurat bencana Indonesia?",
-  "Apa yang dilakukan saat banjir?",
-  "Bagaimana evakuasi saat gunung meletus?",
+  "🌊 Saat tsunami?",
+  "🏔️ Gunung meletus?",
+  "🌧️ Saat banjir?",
+  "🎒 Tas siaga bencana?",
+  "📞 Kontak darurat?",
+  "🏠 Gempa di rumah?",
 ];
 
 const EMERGENCY_CONTACTS = [
@@ -27,51 +27,12 @@ function generateSessionId() {
   );
 }
 
-function TypingIndicator() {
-  return (
-    <div className="flex justify-start message-enter">
-      <div className="bg-white border border-gray-100 shadow-sm rounded-2xl rounded-bl-sm px-4 py-3 flex gap-1.5 items-center">
-        <span className="typing-dot w-2 h-2 bg-gray-400 rounded-full inline-block" />
-        <span className="typing-dot w-2 h-2 bg-gray-400 rounded-full inline-block" />
-        <span className="typing-dot w-2 h-2 bg-gray-400 rounded-full inline-block" />
-      </div>
-    </div>
-  );
-}
-
-function Message({ msg }) {
-  const isUser = msg.role === "user";
-  return (
-    <div
-      className={`flex message-enter ${isUser ? "justify-end" : "justify-start"}`}
-    >
-      {!isUser && (
-        <div className="w-7 h-7 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xs font-bold mr-2 mt-1 flex-shrink-0">
-          CC
-        </div>
-      )}
-      <div
-        className={`max-w-[78%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
-          isUser
-            ? "chat-bubble-user text-white rounded-br-sm"
-            : "bg-white text-gray-800 shadow-sm border border-gray-100 rounded-bl-sm"
-        }`}
-      >
-        {msg.content}
-        {msg.streaming && (
-          <span className="inline-block w-1.5 h-4 bg-gray-300 ml-0.5 animate-pulse rounded align-middle" />
-        )}
-      </div>
-    </div>
-  );
-}
-
 export default function Home() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
       content:
-        "Halo! Saya ChopperCare, asisten tanggap bencana berbasis AI 🆘\n\nSaya siap membantu kamu dengan informasi seputar kesiapsiagaan dan penanganan bencana di Indonesia.\n\nAda yang bisa saya bantu?",
+        "Halo! Saya ChopperCare 🆘\n\nAsisten AI tanggap bencana Indonesia. Tanyakan apa saja seputar kesiapsiagaan dan penanganan bencana.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -105,6 +66,7 @@ export default function Home() {
       if (!userMessage || loading) return;
 
       setInput("");
+      setShowContacts(false);
       setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
       setLoading(true);
       setIsTyping(true);
@@ -116,7 +78,7 @@ export default function Home() {
           {
             role: "assistant",
             content:
-              "⚠️ Kamu sedang offline.\n\nUntuk informasi darurat segera hubungi:\n• BNPB: 117\n• Basarnas: 115\n• Ambulans: 119",
+              "Kamu sedang offline.\n\nHubungi segera:\n• BNPB: 117\n• Basarnas: 115\n• Ambulans: 119",
           },
         ]);
         setLoading(false);
@@ -124,6 +86,7 @@ export default function Home() {
       }
 
       let assistantContent = "";
+      let firstToken = true;
 
       try {
         const res = await fetch(`${API_URL}/api/chat`, {
@@ -134,7 +97,6 @@ export default function Home() {
 
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
-        let firstToken = true;
 
         while (true) {
           const { done, value } = await reader.read();
@@ -177,17 +139,6 @@ export default function Home() {
                   return updated;
                 });
               }
-              if (data.error) {
-                setIsTyping(false);
-                setMessages((prev) => [
-                  ...prev,
-                  {
-                    role: "assistant",
-                    content:
-                      "Maaf, terjadi kesalahan. Silakan coba lagi atau hubungi BNPB di 117.",
-                  },
-                ]);
-              }
             } catch {}
           }
         }
@@ -197,8 +148,7 @@ export default function Home() {
           ...prev,
           {
             role: "assistant",
-            content:
-              "Koneksi bermasalah. Silakan coba lagi atau hubungi BNPB di 117.",
+            content: "Koneksi bermasalah. Coba lagi atau hubungi BNPB di 117.",
           },
         ]);
       } finally {
@@ -210,137 +160,296 @@ export default function Home() {
     [input, loading, isOnline, sessionId],
   );
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  };
-
-  const showQuickQuestions = messages.length <= 1;
+  const showQuickQ = messages.length <= 1;
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50 max-w-2xl mx-auto">
-      {/* Header */}
-      <header className="bg-red-600 text-white px-4 py-3 flex items-center gap-3 shadow-lg z-10">
-        <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-          <span className="text-red-600 font-black text-xs">CC</span>
-        </div>
-        <div className="flex-1 min-w-0">
-          <h1 className="font-semibold text-base leading-tight">ChopperCare</h1>
-          <p className="text-red-200 text-xs truncate">
-            Asisten Tanggap Bencana AI • BNPB
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <div
-            className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-              isOnline ? "bg-green-500" : "bg-gray-500"
-            }`}
-          >
-            {isOnline ? "Online" : "Offline"}
+    <>
+      <style>{`
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; background: #0a0a0a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        #app {
+          display: flex; flex-direction: column;
+          height: 100dvh;
+          max-width: 430px; margin: 0 auto;
+          background: #111;
+        }
+        .header {
+          background: #111; border-bottom: 1px solid #1c1c1c;
+          padding: 14px 16px;
+          display: flex; align-items: center; gap: 10px;
+          flex-shrink: 0;
+        }
+        .avatar {
+          width: 40px; height: 40px; border-radius: 12px;
+          background: #DC2626;
+          display: flex; align-items: center; justify-content: center;
+          font-size: 13px; font-weight: 800; color: white;
+          flex-shrink: 0;
+        }
+        .header-info { flex: 1; }
+        .header-name { font-size: 15px; font-weight: 700; color: #fff; }
+        .header-sub { font-size: 11px; color: #555; margin-top: 1px; }
+        .header-right { display: flex; align-items: center; gap: 8px; }
+        .online-badge {
+          display: flex; align-items: center; gap: 4px;
+          font-size: 11px; color: #22c55e; font-weight: 500;
+        }
+        .online-dot {
+          width: 7px; height: 7px; border-radius: 50%;
+          background: #22c55e; box-shadow: 0 0 5px #22c55e;
+        }
+        .online-dot.off { background: #444; box-shadow: none; }
+        .sos-btn {
+          background: #DC2626; border: none; border-radius: 8px;
+          padding: 7px 11px; font-size: 12px; font-weight: 700;
+          color: white; cursor: pointer; letter-spacing: 0.3px;
+        }
+        .emergency-panel {
+          background: #0f0a0a; border-bottom: 1px solid #1e1010;
+          padding: 12px 16px;
+          display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+          flex-shrink: 0;
+        }
+        .contact-card {
+          background: #191010; border: 1px solid #2a1010;
+          border-radius: 10px; padding: 10px 12px;
+          display: flex; align-items: center; justify-content: space-between;
+          text-decoration: none;
+        }
+        .contact-name { font-size: 11px; color: #888; font-weight: 500; }
+        .contact-number { font-size: 17px; font-weight: 800; color: #DC2626; }
+        .messages {
+          flex: 1; overflow-y: auto;
+          padding: 16px; display: flex; flex-direction: column; gap: 10px;
+          scrollbar-width: none;
+        }
+        .messages::-webkit-scrollbar { display: none; }
+        .msg-row { display: flex; gap: 8px; align-items: flex-end; }
+        .msg-row.user { flex-direction: row-reverse; }
+        .msg-icon {
+          width: 28px; height: 28px; border-radius: 8px;
+          background: #1c1c1c; flex-shrink: 0;
+          display: flex; align-items: center; justify-content: center;
+          font-size: 10px; font-weight: 700; color: #DC2626;
+        }
+        .bubble {
+          max-width: 76%; padding: 10px 14px;
+          font-size: 14px; line-height: 1.6;
+          white-space: pre-wrap; word-break: break-word;
+          border-radius: 16px;
+        }
+        .bubble.assistant {
+          background: #1a1a1a; color: #ddd;
+          border: 1px solid #222; border-bottom-left-radius: 4px;
+        }
+        .bubble.user {
+          background: #DC2626; color: white;
+          border-bottom-right-radius: 4px;
+        }
+        .cursor {
+          display: inline-block; width: 2px; height: 13px;
+          background: #555; margin-left: 2px; vertical-align: middle;
+          animation: blink 1s infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        .typing-row { display: flex; gap: 8px; align-items: flex-end; }
+        .typing-bubble {
+          background: #1a1a1a; border: 1px solid #222;
+          border-radius: 16px; border-bottom-left-radius: 4px;
+          padding: 12px 16px; display: flex; gap: 5px; align-items: center;
+        }
+        .dot {
+          width: 7px; height: 7px; border-radius: 50%; background: #333;
+          animation: ta 1.4s infinite ease-in-out;
+        }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes ta {
+          0%,60%,100% { transform: scale(0.8); background: #2a2a2a; }
+          30% { transform: scale(1.2); background: #DC2626; }
+        }
+        .quick-wrap { padding: 0 16px 12px; flex-shrink: 0; }
+        .quick-label { font-size: 10px; color: #3a3a3a; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; margin-bottom: 8px; }
+        .quick-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+        .pill {
+          background: #171717; border: 1px solid #222; border-radius: 20px;
+          padding: 7px 12px; font-size: 12px; color: #999;
+          cursor: pointer; white-space: nowrap; transition: all 0.15s;
+        }
+        .pill:hover { background: #1e1e1e; border-color: #DC2626; color: #fff; }
+        .pill:active { transform: scale(0.96); }
+        .input-wrap {
+          background: #111; border-top: 1px solid #1c1c1c;
+          padding: 12px 16px;
+          padding-bottom: max(12px, env(safe-area-inset-bottom));
+          flex-shrink: 0;
+        }
+        .input-row { display: flex; gap: 8px; align-items: flex-end; }
+        .input-field {
+          flex: 1; background: #1a1a1a; border: 1px solid #252525;
+          border-radius: 14px; padding: 11px 14px;
+          font-size: 14px; color: #e0e0e0; resize: none;
+          outline: none; min-height: 44px; max-height: 110px;
+          font-family: inherit; line-height: 1.5; transition: border-color 0.15s;
+        }
+        .input-field::placeholder { color: #3a3a3a; }
+        .input-field:focus { border-color: #DC2626; }
+        .send {
+          width: 44px; height: 44px; background: #DC2626;
+          border: none; border-radius: 12px;
+          display: flex; align-items: center; justify-content: center;
+          cursor: pointer; flex-shrink: 0; transition: all 0.15s;
+        }
+        .send:hover { background: #b91c1c; }
+        .send:active { transform: scale(0.92); }
+        .send:disabled { background: #1e1e1e; cursor: not-allowed; }
+        .hotline {
+          text-align: center; font-size: 11px; color: #2a2a2a; margin-top: 8px;
+        }
+        .hotline strong { color: #4a1010; }
+      `}</style>
+
+      <div id="app">
+        <div className="header">
+          <div className="avatar">CC</div>
+          <div className="header-info">
+            <div className="header-name">ChopperCare</div>
+            <div className="header-sub">Tanggap Bencana AI • BNPB</div>
           </div>
-          <button
-            onClick={() => setShowContacts(!showContacts)}
-            className="bg-red-700 hover:bg-red-800 rounded-lg px-2 py-1 text-xs font-medium transition-colors"
-          >
-            🆘 Darurat
-          </button>
-        </div>
-      </header>
-
-      {/* Emergency contacts dropdown */}
-      {showContacts && (
-        <div className="bg-red-50 border-b border-red-200 px-4 py-3 grid grid-cols-2 gap-2">
-          {EMERGENCY_CONTACTS.map((c) => (
-            <a
-              key={c.name}
-              href={`tel:${c.number}`}
-              className="flex items-center justify-between bg-white rounded-xl px-3 py-2 border border-red-100 hover:bg-red-50 transition-colors"
+          <div className="header-right">
+            <div className="online-badge">
+              <div className={`online-dot ${isOnline ? "" : "off"}`} />
+            </div>
+            <button
+              className="sos-btn"
+              onClick={() => setShowContacts(!showContacts)}
             >
-              <span className="text-sm font-medium text-gray-700">
-                {c.name}
-              </span>
-              <span className="text-red-600 font-bold text-sm">{c.number}</span>
-            </a>
-          ))}
+              🆘 SOS
+            </button>
+          </div>
         </div>
-      )}
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-        {messages.map((msg, i) => (
-          <Message key={i} msg={msg} />
-        ))}
-        {isTyping && <TypingIndicator />}
-        <div ref={messagesEndRef} />
-      </div>
-
-      {/* Quick questions */}
-      {showQuickQuestions && (
-        <div className="px-4 pb-3">
-          <p className="text-xs text-gray-400 mb-2 font-medium">
-            Pertanyaan umum:
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            {QUICK_QUESTIONS.map((q, i) => (
-              <button
-                key={i}
-                onClick={() => sendMessage(q)}
-                disabled={loading}
-                className="text-xs bg-white border border-red-200 text-red-700 rounded-full px-3 py-1.5 hover:bg-red-50 active:bg-red-100 transition-colors disabled:opacity-50"
-              >
-                {q}
-              </button>
+        {showContacts && (
+          <div className="emergency-panel">
+            {EMERGENCY_CONTACTS.map((c) => (
+              <a key={c.name} href={`tel:${c.number}`} className="contact-card">
+                <span className="contact-name">{c.name}</span>
+                <span className="contact-number">{c.number}</span>
+              </a>
             ))}
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Input area */}
-      <div className="px-4 py-3 bg-white border-t border-gray-200 shadow-up">
-        <div className="flex gap-2 items-end">
-          <textarea
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Tanya seputar bencana..."
-            rows={1}
-            disabled={loading}
-            className="flex-1 resize-none rounded-xl border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400 max-h-28 disabled:bg-gray-50 transition-colors"
-            style={{ minHeight: "44px" }}
-          />
-          <button
-            onClick={() => sendMessage()}
-            disabled={loading || !input.trim()}
-            className="bg-red-600 text-white rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-red-700 active:bg-red-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex-shrink-0 h-11"
-          >
-            {loading ? (
-              <span className="flex gap-1 items-center">
-                <span
-                  className="w-1.5 h-1.5 bg-white rounded-full animate-bounce"
-                  style={{ animationDelay: "0ms" }}
-                />
-                <span
-                  className="w-1.5 h-1.5 bg-white rounded-full animate-bounce"
-                  style={{ animationDelay: "150ms" }}
-                />
-                <span
-                  className="w-1.5 h-1.5 bg-white rounded-full animate-bounce"
-                  style={{ animationDelay: "300ms" }}
-                />
-              </span>
-            ) : (
-              "Kirim"
-            )}
-          </button>
+        <div className="messages">
+          {messages.map((msg, i) => (
+            <div key={i} className={`msg-row ${msg.role}`}>
+              {msg.role === "assistant" && <div className="msg-icon">CC</div>}
+              <div className={`bubble ${msg.role}`}>
+                {msg.content}
+                {msg.streaming && <span className="cursor" />}
+              </div>
+            </div>
+          ))}
+          {isTyping && (
+            <div className="typing-row">
+              <div className="msg-icon">CC</div>
+              <div className="typing-bubble">
+                <div className="dot" />
+                <div className="dot" />
+                <div className="dot" />
+              </div>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
         </div>
-        <p className="text-xs text-gray-400 mt-1.5 text-center">
-          Informasi darurat: BNPB <strong>117</strong> • Basarnas{" "}
-          <strong>115</strong>
-        </p>
+
+        {showQuickQ && (
+          <div className="quick-wrap">
+            <div className="quick-label">Tanya langsung</div>
+            <div className="quick-pills">
+              {QUICK_QUESTIONS.map((q, i) => (
+                <button
+                  key={i}
+                  className="pill"
+                  onClick={() => sendMessage(q)}
+                  disabled={loading}
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="input-wrap">
+          <div className="input-row">
+            <textarea
+              ref={inputRef}
+              className="input-field"
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+                e.target.style.height = "44px";
+                e.target.style.height =
+                  Math.min(e.target.scrollHeight, 110) + "px";
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  sendMessage();
+                }
+              }}
+              placeholder="Tanya seputar bencana..."
+              rows={1}
+              disabled={loading}
+            />
+            <button
+              className="send"
+              onClick={() => sendMessage()}
+              disabled={loading || !input.trim()}
+            >
+              {loading ? (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="9" stroke="#333" strokeWidth="2" />
+                  <path
+                    d="M12 3a9 9 0 0 1 9 9"
+                    stroke="#DC2626"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      type="rotate"
+                      from="0 12 12"
+                      to="360 12 12"
+                      dur="0.7s"
+                      repeatCount="indefinite"
+                    />
+                  </path>
+                </svg>
+              ) : (
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+              )}
+            </button>
+          </div>
+          <div className="hotline">
+            BNPB <strong>117</strong> &nbsp;•&nbsp; Basarnas{" "}
+            <strong>115</strong> &nbsp;•&nbsp; Ambulans <strong>119</strong>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
