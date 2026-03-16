@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import ReactMarkdown from "react-markdown";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://choppercare.toeanmuda.id";
@@ -304,9 +305,30 @@ export default function Home() {
         .send:active { transform: scale(0.92); }
         .send:disabled { background: #1e1e1e; cursor: not-allowed; }
         .hotline {
-          text-align: center; font-size: 11px; color: #2a2a2a; margin-top: 8px;
+          text-align: center; font-size: 11px; color: #555; margin-top: 8px;
         }
-        .hotline strong { color: #4a1010; }
+        .hotline strong { color: #DC2626; }
+        .bubble.assistant h1,
+        .bubble.assistant h2,
+        .bubble.assistant h3 {
+          font-size: 14px; font-weight: 700; color: #fff;
+          margin-bottom: 6px; margin-top: 10px;
+        }
+        .bubble.assistant h1:first-child,
+        .bubble.assistant h2:first-child,
+        .bubble.assistant h3:first-child { margin-top: 0; }
+        .bubble.assistant strong { color: #fff; font-weight: 700; }
+        .bubble.assistant em { color: #aaa; font-style: italic; }
+        .bubble.assistant p { margin-bottom: 8px; }
+        .bubble.assistant p:last-child { margin-bottom: 0; }
+        .bubble.assistant ul, .bubble.assistant ol {
+          padding-left: 16px; margin-bottom: 8px;
+        }
+        .bubble.assistant li { margin-bottom: 4px; }
+        .bubble.assistant code {
+          background: #2a2a2a; border-radius: 4px;
+          padding: 1px 5px; font-size: 12px; color: #e5e5e5;
+        }
       `}</style>
 
       <div id="app">
@@ -345,8 +367,14 @@ export default function Home() {
             <div key={i} className={`msg-row ${msg.role}`}>
               {msg.role === "assistant" && <div className="msg-icon">CC</div>}
               <div className={`bubble ${msg.role}`}>
-                {msg.content}
-                {msg.streaming && <span className="cursor" />}
+                {msg.role === "assistant" ? (
+                  <>
+                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                    {msg.streaming && <span className="cursor" />}
+                  </>
+                ) : (
+                  msg.content
+                )}
               </div>
             </div>
           ))}
