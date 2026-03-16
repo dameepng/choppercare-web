@@ -321,14 +321,25 @@ export default function Home() {
         .bubble.assistant em { color: #aaa; font-style: italic; }
         .bubble.assistant p { margin-bottom: 8px; }
         .bubble.assistant p:last-child { margin-bottom: 0; }
-        .bubble.assistant { white-space: normal; }
-        .bubble.assistant ul, .bubble.assistant ol {
-          padding-left: 18px; margin-bottom: 6px; margin-top: 4px;
+        .bubble.assistant { white-space: normal; text-align: justify; }
+        .bubble.assistant ul {
+          padding-left: 20px; margin: 6px 0;
+          list-style-type: disc;
         }
-        .bubble.assistant li { margin-bottom: 2px; line-height: 1.5; }
+        .bubble.assistant ol {
+          padding-left: 20px; margin: 6px 0;
+          list-style-type: decimal;
+        }
+        .bubble.assistant li { margin-bottom: 4px; line-height: 1.6; }
         .bubble.assistant li p { margin-bottom: 0; }
-        .bubble.assistant p { margin-bottom: 6px; }
+        .bubble.assistant li::marker { color: #DC2626; }
+        .bubble.assistant p { margin-bottom: 8px; text-align: justify; }
         .bubble.assistant p:last-child { margin-bottom: 0; }
+        .bubble.assistant strong { color: #fff; font-weight: 700; }
+        .bubble.assistant h1, .bubble.assistant h2, .bubble.assistant h3 {
+          font-size: 14px; font-weight: 700; color: #fff;
+          margin: 10px 0 4px; text-align: left;
+        }
         .bubble.assistant code {
           background: #2a2a2a; border-radius: 4px;
           padding: 1px 5px; font-size: 12px; color: #e5e5e5;
