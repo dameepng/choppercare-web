@@ -23,6 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="id">
       <head>
+        <meta name="dicoding:email" content="ahmaddamanhuri45@gmail.com" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
         <meta
           name="viewport"
