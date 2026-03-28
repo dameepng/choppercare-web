@@ -356,7 +356,7 @@ export default function Home() {
         .bubble.assistant em { color: #aaa; font-style: italic; }
         .bubble.assistant p { margin-bottom: 8px; }
         .bubble.assistant p:last-child { margin-bottom: 0; }
-        .bubble.assistant { white-space: normal; text-align: justify; }
+        .bubble.assistant { white-space: normal; text-align: left; }
         .bubble.assistant ul {
           padding-left: 20px; margin: 6px 0;
           list-style-type: disc;
@@ -368,7 +368,7 @@ export default function Home() {
         .bubble.assistant li { margin-bottom: 4px; line-height: 1.6; }
         .bubble.assistant li p { margin-bottom: 0; }
         .bubble.assistant li::marker { color: #DC2626; }
-        .bubble.assistant p { margin-bottom: 8px; text-align: justify; }
+        .bubble.assistant p { margin-bottom: 8px; text-align: left; }
         .bubble.assistant p:last-child { margin-bottom: 0; }
         .bubble.assistant strong { color: #fff; font-weight: 700; }
         .bubble.assistant h1, .bubble.assistant h2, .bubble.assistant h3 {

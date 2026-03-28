@@ -14,6 +14,7 @@ import { useEmergencyLocation } from "./useEmergencyLocation";
 export default function EmergencyContact() {
   const { status, coordinates, cityName, error, requestPermission } =
     useEmergencyLocation();
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const [nearestCity, setNearestCity] = useState(null);
   const [cityContacts, setCityContacts] = useState(null);
@@ -80,8 +81,33 @@ export default function EmergencyContact() {
     };
   }, [coordinates, status]);
 
+  if (!isExpanded) {
+    return (
+      <section className="ec-shell" aria-label="Kontak darurat terdekat">
+        <button className="ec-collapse-toggle" onClick={() => setIsExpanded(true)}>
+          <span className="ec-collapse-icon" aria-hidden="true">
+            🚨
+          </span>
+          <span className="ec-collapse-copy">
+            <span className="ec-collapse-title">Kontak Darurat Terdekat</span>
+            <span className="ec-collapse-subtitle">
+              Buka lagi panel kontak darurat berbasis GPS
+            </span>
+          </span>
+        </button>
+      </section>
+    );
+  }
+
+  const renderBackButton = () => (
+    <button className="ec-back-button" onClick={() => setIsExpanded(false)}>
+      ← Kembali ke Chat
+    </button>
+  );
+
   const renderNationalFallback = (message) => (
     <div className="ec-card ec-card-fallback">
+      {renderBackButton()}
       <div className="ec-warning">{message}</div>
       <EmergencyContactList contacts={nationalContacts.contacts} />
     </div>
@@ -91,6 +117,7 @@ export default function EmergencyContact() {
     return (
       <section className="ec-shell" aria-label="Kontak darurat terdekat">
         <div className="ec-card">
+          {renderBackButton()}
           <div className="ec-kicker">Kontak Darurat Terdekat</div>
           <h2 className="ec-title">Butuh nomor bantuan di sekitar lokasimu?</h2>
           <p className="ec-subtext">
@@ -109,6 +136,7 @@ export default function EmergencyContact() {
     return (
       <section className="ec-shell" aria-label="Kontak darurat terdekat">
         <div className="ec-card ec-card-loading">
+          {renderBackButton()}
           <div className="ec-spinner" aria-hidden="true" />
           <div className="ec-loading-text">Mendeteksi lokasi...</div>
         </div>
@@ -120,6 +148,7 @@ export default function EmergencyContact() {
     return (
       <section className="ec-shell" aria-label="Kontak darurat terdekat">
         <div className="ec-card">
+          {renderBackButton()}
           <div className="ec-warning">Akses GPS ditolak.</div>
           <p className="ec-subtext">
             Izinkan lokasi agar kami bisa mencari kontak darurat terdekat. Sementara
@@ -138,6 +167,7 @@ export default function EmergencyContact() {
     return (
       <section className="ec-shell" aria-label="Kontak darurat terdekat">
         <div className="ec-card">
+          {renderBackButton()}
           <div className="ec-warning">{error || "Lokasi tidak bisa dideteksi."}</div>
           <p className="ec-subtext">
             Gunakan nomor nasional berikut sambil mencoba mendeteksi lokasi lagi.
@@ -155,6 +185,7 @@ export default function EmergencyContact() {
     return (
       <section className="ec-shell" aria-label="Kontak darurat terdekat">
         <div className="ec-card ec-card-loading">
+          {renderBackButton()}
           <div className="ec-spinner" aria-hidden="true" />
           <div className="ec-loading-text">Menyiapkan kontak darurat terdekat...</div>
         </div>
@@ -165,6 +196,7 @@ export default function EmergencyContact() {
   return (
     <section className="ec-shell" aria-label="Kontak darurat terdekat">
       <div className="ec-card">
+        {renderBackButton()}
         <div className="ec-kicker">Kontak Darurat Terdekat</div>
         <h2 className="ec-title">
           📍 Kontak Darurat — {nearestCity?.cityName || cityName || "Lokasi Terdekat"}
