@@ -1,0 +1,244 @@
+.ec-shell {
+  padding: 12px 16px 0;
+  flex-shrink: 0;
+}
+
+.ec-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 18px;
+  padding: 16px;
+  color: #ddd;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+}
+
+.ec-card + .ec-card {
+  margin-top: 10px;
+}
+
+.ec-card-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ec-card-fallback {
+  margin-top: 10px;
+}
+
+.ec-kicker {
+  color: #888;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ec-title {
+  margin-top: 8px;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.ec-subtext {
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ec-meta {
+  margin-top: 8px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ec-warning {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.ec-flag {
+  margin-top: 10px;
+  border: 1px solid #3a2b2b;
+  background: #191010;
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: #f3c4c4;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.ec-primary-button,
+.ec-secondary-button {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.ec-primary-button {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: #fff;
+  padding: 15px 16px;
+}
+
+.ec-secondary-button {
+  margin-top: 14px;
+  background: #1f1f1f;
+  color: #fff;
+  padding: 14px 16px;
+  border: 1px solid #2a2a2a;
+}
+
+.ec-primary-button:hover,
+.ec-secondary-button:hover {
+  transform: translateY(-1px);
+}
+
+.ec-spinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 2px solid #333;
+  border-top-color: #dc2626;
+  animation: ec-spin 0.9s linear infinite;
+}
+
+.ec-loading-text {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ec-list {
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.ec-service-card {
+  border-radius: 14px;
+  border: 1px solid #1f1f1f;
+  background: #111;
+  padding: 12px;
+}
+
+.ec-service-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.ec-service-icon {
+  font-size: 16px;
+}
+
+.ec-service-title {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ec-entry-list {
+  display: grid;
+  gap: 8px;
+}
+
+.ec-entry-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  background: #171717;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.ec-entry-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.ec-entry-label {
+  color: #888;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ec-entry-number {
+  margin-top: 3px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.ec-entry-note {
+  margin-top: 4px;
+  color: #aaa;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.ec-call-button {
+  flex-shrink: 0;
+  background: #dc2626;
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.ec-footer {
+  margin-top: 14px;
+  color: #888;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+@keyframes ec-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 430px) {
+  .ec-shell {
+    padding-top: 10px;
+  }
+
+  .ec-card {
+    padding: 14px;
+  }
+
+  .ec-title {
+    font-size: 18px;
+  }
+
+  .ec-entry-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ec-call-button {
+    width: 100%;
+    text-align: center;
+  }
+}

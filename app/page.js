@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
+import EmergencyContact from "@/src/features/emergency/EmergencyContact";
+import "@/src/features/emergency/emergency.css";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://choppercare.toeanmuda.id";
@@ -409,6 +411,8 @@ export default function Home() {
             ))}
           </div>
         )}
+
+        <EmergencyContact />
 
         <div className="messages">
           {messages.map((msg, i) => (

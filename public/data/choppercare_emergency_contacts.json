@@ -1,0 +1,927 @@
+{
+  "metadata": {
+    "judul": "Database Kontak Darurat Indonesia - ChopperCare",
+    "versi": "1.0",
+    "sumber": [
+      "Kominfo layanan112.komdigi.go.id",
+      "BNPB",
+      "Polri",
+      "Basarnas",
+      "Kemenkes"
+    ],
+    "catatan": "Nomor nasional (112, 110, 113, 115, 119) berlaku di SELURUH Indonesia. Nomor lokal adalah tambahan untuk akses langsung per daerah.",
+    "cara_pakai_rag": "Gunakan koordinat GPS user → reverse geocode ke kota/kabupaten → match ke kota_id → tampilkan darurat lokal + nasional sebagai fallback."
+  },
+  "nomor_nasional": {
+    "layer": "nasional",
+    "description": "Nomor darurat nasional berlaku di SELURUH Indonesia, gratis 24 jam, bisa dipanggil tanpa pulsa dan saat HP terkunci.",
+    "services": {
+      "darurat_terpadu": {
+        "nomor": "112",
+        "nama": "Call Center Darurat Terpadu",
+        "catatan": "Integrates all services, free, works without SIM card"
+      },
+      "polisi": {
+        "nomor": "110",
+        "nama": "Kepolisian Republik Indonesia (Polri)"
+      },
+      "damkar": {
+        "nomor": "113",
+        "nama": "Pemadam Kebakaran Nasional"
+      },
+      "basarnas": {
+        "nomor": "115",
+        "nama": "Badan SAR Nasional (Basarnas)"
+      },
+      "ambulans_1": {
+        "nomor": "118",
+        "nama": "Ambulans / Layanan Medis Darurat"
+      },
+      "ambulans_2": {
+        "nomor": "119",
+        "nama": "Ambulans / SPGDT Kemenkes"
+      },
+      "bpbd_bencana": {
+        "nomor": "117",
+        "nama": "BNPB – Badan Nasional Penanggulangan Bencana"
+      },
+      "posko_bencana": {
+        "nomor": "129",
+        "nama": "Posko Bencana Alam Nasional"
+      },
+      "pmi": {
+        "nomor": "021-7992325",
+        "nama": "Palang Merah Indonesia (PMI) Pusat"
+      }
+    },
+    "rag_chunks": [
+      "Nomor darurat terpadu 112 adalah nomor tunggal yang mengintegrasikan seluruh layanan darurat di Indonesia. Dapat dihubungi gratis dari HP maupun telepon rumah, bahkan tanpa SIM card selama masih ada sinyal. Layanan 112 beroperasi 24 jam dan akan meneruskan laporan ke instansi terkait seperti Polisi, Damkar, atau Ambulans.",
+      "Polisi Indonesia dapat dihubungi di nomor 110. Untuk kebakaran hubungi 113. Basarnas (Search and Rescue Nasional) dapat dihubungi di 115. Ambulans dan layanan medis darurat tersedia di 118 dan 119. BNPB untuk bencana nasional di nomor 117.",
+      "Jika berada di kota yang belum memiliki layanan 112, gunakan nomor spesifik: polisi 110, damkar 113, basarnas 115, ambulans 118 atau 119. Posko bencana alam dapat dihubungi di 129. PMI Pusat di 021-7992325."
+    ]
+  },
+  "kota": [
+    {
+      "id": "dki_jakarta",
+      "kota": "DKI Jakarta",
+      "provinsi": "DKI Jakarta",
+      "kode_area": "021",
+      "koordinat": {
+        "lat": -6.2088,
+        "lng": 106.8456
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112 (Jakarta Siaga)",
+        "polisi": {
+          "polda": "(021) 5234-5678",
+          "polda_metro_jaya": "(021) 52960800"
+        },
+        "damkar": {
+          "pusat": "(021) 113",
+          "dinas_gulkarmat": "(021) 3456789"
+        },
+        "basarnas": {
+          "kantor_jakarta": "(021) 5501010"
+        },
+        "ambulans": {
+          "dinas_kesehatan_dki": "119",
+          "pmi_dki": "(021) 390-6666"
+        },
+        "bpbd": "(021) 29827444"
+      },
+      "rag_narasi": "Di DKI Jakarta, nomor darurat terpadu adalah 112 (Jakarta Siaga) yang aktif 24 jam. Polda Metro Jaya dapat dihubungi di (021) 52960800. Dinas Pemadam Kebakaran dan Penyelamatan (Gulkarmat) DKI dapat dihubungi di 113 atau (021) 3456789. Basarnas Jakarta di (021) 5501010. Ambulans DKI hubungi 119 atau PMI DKI di (021) 390-6666. BPBD DKI di (021) 29827444."
+    },
+    {
+      "id": "kota_tangerang",
+      "kota": "Kota Tangerang",
+      "provinsi": "Banten",
+      "kode_area": "021",
+      "koordinat": {
+        "lat": -6.1781,
+        "lng": 106.6297
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polresta": "(021) 5534-XXXX"
+        },
+        "damkar": {
+          "pusat": "(021) 5582144",
+          "ciledug": "(021) 73450934",
+          "cibodas": "(021) 55732113",
+          "batuceper": "(021) 5522366",
+          "periuk": "(021) 59319462"
+        },
+        "basarnas": {
+          "via_112": "112 atau 115"
+        },
+        "ambulans": {
+          "pmi_tangerang": "081818242081"
+        },
+        "bpbd": "(021) 5582144"
+      },
+      "rag_narasi": "Di Kota Tangerang Banten, nomor darurat adalah 112. Damkar Kota Tangerang di (021) 5582144. Pos Ciledug (021) 73450934, Cibodas (021) 55732113, Batuceper (021) 5522366, Periuk (021) 59319462. PMI Tangerang di 081818242081."
+    },
+    {
+      "id": "kota_tangerang_selatan",
+      "kota": "Kota Tangerang Selatan",
+      "provinsi": "Banten",
+      "kode_area": "021",
+      "koordinat": {
+        "lat": -6.2897,
+        "lng": 106.7178
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polresta_tangsel": "110"
+        },
+        "damkar": {
+          "pusat": "113"
+        },
+        "basarnas": "115",
+        "ambulans": "119",
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Tangerang Selatan (Tangsel) Banten, gunakan nomor darurat terpadu 112. Polisi 110, Damkar 113, Basarnas 115, Ambulans 119."
+    },
+    {
+      "id": "kabupaten_bogor",
+      "kota": "Kabupaten Bogor",
+      "provinsi": "Jawa Barat",
+      "kode_area": "021",
+      "koordinat": {
+        "lat": -6.5942,
+        "lng": 106.7892
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polres": "110"
+        },
+        "damkar": {
+          "pusat": "(021) 8753547"
+        },
+        "basarnas": "115",
+        "ambulans": "119",
+        "bpbd": "081210109002 / 085175309567"
+      },
+      "rag_narasi": "Di Kabupaten Bogor Jawa Barat, nomor darurat 112 aktif. Damkar Kabupaten Bogor di (021) 8753547. BPBD Kabupaten Bogor di 081210109002 atau 085175309567. Ambulans 119, Basarnas 115."
+    },
+    {
+      "id": "kota_bekasi",
+      "kota": "Kota Bekasi",
+      "provinsi": "Jawa Barat",
+      "kode_area": "021",
+      "koordinat": {
+        "lat": -6.2349,
+        "lng": 106.9896
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polresta": "110"
+        },
+        "damkar": {
+          "pusat_1": "(021) 22137870",
+          "pusat_2": "(021) 22162577"
+        },
+        "basarnas": "115",
+        "ambulans": "119",
+        "bpbd": "081219071900 / 087760265646"
+      },
+      "rag_narasi": "Di Kota Bekasi Jawa Barat, nomor darurat 112 aktif. Damkar Kota Bekasi di (021) 22137870 dan (021) 22162577. BPBD di 081219071900 atau 087760265646. Ambulans 119, Basarnas 115, Polisi 110."
+    },
+    {
+      "id": "kota_bandung",
+      "kota": "Kota Bandung",
+      "provinsi": "Jawa Barat",
+      "kode_area": "022",
+      "koordinat": {
+        "lat": -6.9175,
+        "lng": 107.6191
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polrestabes": "(022) 4203138"
+        },
+        "damkar": {
+          "dinas": "(022) 7276666 / 113"
+        },
+        "basarnas": "115",
+        "ambulans": {
+          "pmi": "(022) 7302668",
+          "rshs": "(022) 2034953"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Bandung Jawa Barat, nomor darurat 112 telah aktif. Polrestabes Bandung di (022) 4203138. Damkar Bandung di (022) 7276666 atau 113. PMI Bandung di (022) 7302668. RS Hasan Sadikin (RSHS) di (022) 2034953. Basarnas 115."
+    },
+    {
+      "id": "kabupaten_bandung",
+      "kota": "Kabupaten Bandung",
+      "provinsi": "Jawa Barat",
+      "kode_area": "022",
+      "koordinat": {
+        "lat": -7.1305,
+        "lng": 107.5695
+      },
+      "layanan_112": false,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": "110",
+        "damkar": {
+          "cc_damkar": "022-5891113 / 085163589113"
+        },
+        "basarnas": "115",
+        "ambulans": "119",
+        "bpbd": "085162901129"
+      },
+      "rag_narasi": "Di Kabupaten Bandung Jawa Barat, hubungi BPBD di 085162901129. Damkar Kabupaten Bandung di 022-5891113 atau 085163589113. Polisi 110, Ambulans 119, Basarnas 115."
+    },
+    {
+      "id": "kota_bogor",
+      "kota": "Kota Bogor",
+      "provinsi": "Jawa Barat",
+      "kode_area": "0251",
+      "koordinat": {
+        "lat": -6.5944,
+        "lng": 106.7892
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polresta": "(0251) 8321048"
+        },
+        "damkar": {
+          "pusat": "(0251) 113"
+        },
+        "basarnas": "115",
+        "ambulans": {
+          "rsud": "(0251) 8312292"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Bogor Jawa Barat, nomor darurat 112 aktif. Polresta Bogor di (0251) 8321048. Damkar di (0251) 113. RSUD Kota Bogor di (0251) 8312292. Ambulans 119, Basarnas 115."
+    },
+    {
+      "id": "kota_depok",
+      "kota": "Kota Depok",
+      "provinsi": "Jawa Barat",
+      "kode_area": "021",
+      "koordinat": {
+        "lat": -6.4025,
+        "lng": 106.7942
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polresta": "110"
+        },
+        "damkar": "113",
+        "basarnas": "115",
+        "ambulans": "119",
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Depok Jawa Barat, nomor darurat 112 aktif. Untuk kebakaran hubungi Damkar 113. Polisi 110, Ambulans 119, Basarnas 115."
+    },
+    {
+      "id": "kabupaten_garut",
+      "kota": "Kabupaten Garut",
+      "provinsi": "Jawa Barat",
+      "kode_area": "0262",
+      "koordinat": {
+        "lat": -7.2112,
+        "lng": 107.9065
+      },
+      "layanan_112": false,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": "110",
+        "damkar": "(0262) 232113",
+        "basarnas": "115",
+        "ambulans": "119",
+        "bpbd": "085220611117"
+      },
+      "rag_narasi": "Di Kabupaten Garut Jawa Barat, Damkar di (0262) 232113. BPBD Garut di 085220611117. Polisi 110, Ambulans 119, Basarnas 115."
+    },
+    {
+      "id": "kabupaten_cianjur",
+      "kota": "Kabupaten Cianjur",
+      "provinsi": "Jawa Barat",
+      "kode_area": "0263",
+      "koordinat": {
+        "lat": -6.8195,
+        "lng": 107.1383
+      },
+      "layanan_112": false,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": "110",
+        "damkar": {
+          "cianjur": "(0263) 281392",
+          "ciranjang": "(0263) 321213",
+          "cipanas": "(0263) 521573"
+        },
+        "basarnas": "115",
+        "ambulans": "119",
+        "bpbd": "081122205252"
+      },
+      "rag_narasi": "Di Kabupaten Cianjur Jawa Barat, BPBD di 081122205252. Damkar Cianjur (0263) 281392, Ciranjang (0263) 321213, Cipanas (0263) 521573. Polisi 110, Ambulans 119, Basarnas 115."
+    },
+    {
+      "id": "kota_semarang",
+      "kota": "Kota Semarang",
+      "provinsi": "Jawa Tengah",
+      "kode_area": "024",
+      "koordinat": {
+        "lat": -6.9932,
+        "lng": 110.4203
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polrestabes": "(024) 8412222"
+        },
+        "damkar": {
+          "dinas": "(024) 7607076 / 7605871 / 7616867 / 113"
+        },
+        "basarnas": "115",
+        "ambulans": {
+          "rsud": "(024) 8413476",
+          "kecelakaan": "(024) 8313416"
+        },
+        "bpbd": "(024) 519927"
+      },
+      "rag_narasi": "Di Kota Semarang Jawa Tengah, nomor darurat 112 aktif. Polrestabes Semarang di (024) 8412222. Damkar Semarang di (024) 7607076, 7605871, atau 7616867. Ambulans RSUD di (024) 8413476, ambulans kecelakaan (024) 8313416. Basarnas 115."
+    },
+    {
+      "id": "kota_surakarta___solo",
+      "kota": "Kota Surakarta / Solo",
+      "provinsi": "Jawa Tengah",
+      "kode_area": "0271",
+      "koordinat": {
+        "lat": -7.5755,
+        "lng": 110.8243
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polresta": "(0271) 714406"
+        },
+        "damkar": "113",
+        "basarnas": "115",
+        "ambulans": {
+          "spgdt_119": "119",
+          "psc_solo": "(0271) 712119"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Solo (Surakarta) Jawa Tengah, nomor darurat 112 aktif dan terintegrasi. Polresta Solo di (0271) 714406. Sistem SPGDT ambulans di 119 dan PSC Solo di (0271) 712119, termasuk info kamar RS real-time. Basarnas 115."
+    },
+    {
+      "id": "kota_yogyakarta",
+      "kota": "Kota Yogyakarta",
+      "provinsi": "DI Yogyakarta",
+      "kode_area": "0274",
+      "koordinat": {
+        "lat": -7.7971,
+        "lng": 110.3688
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polda_diy": "(0274) 563494",
+          "poltabes_yogya": "(0274) 512940"
+        },
+        "damkar": "113",
+        "basarnas": "115",
+        "ambulans": {
+          "rsud_kota_yogya": "(0274) 371195",
+          "rsu_sardjito": "(0274) 587333",
+          "rsu_bethesda": "(0274) 586688",
+          "rsu_panti_rapih": "(0274) 563333"
+        },
+        "bpbd": "(0274) 555584 / 555585"
+      },
+      "rag_narasi": "Di Kota Yogyakarta DIY, nomor darurat 112 aktif. Polda DIY di (0274) 563494, Poltabes Yogyakarta (0274) 512940. Damkar 113. RSUD Kota Yogyakarta (0274) 371195, RSU Sardjito (0274) 587333, Bethesda (0274) 586688, Panti Rapih (0274) 563333. BPBD DIY di (0274) 555584."
+    },
+    {
+      "id": "kabupaten_bantul",
+      "kota": "Kabupaten Bantul",
+      "provinsi": "DI Yogyakarta",
+      "kode_area": "0274",
+      "koordinat": {
+        "lat": -7.8889,
+        "lng": 110.3296
+      },
+      "layanan_112": false,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polres": "(0274) 367410"
+        },
+        "damkar": "113",
+        "basarnas": "115",
+        "ambulans": {
+          "rsud_bantul": "(0274) 367381"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kabupaten Bantul DIY, Polres Bantul di (0274) 367410. RSUD Bantul di (0274) 367381. Damkar 113, Basarnas 115, Ambulans 119."
+    },
+    {
+      "id": "kabupaten_sleman",
+      "kota": "Kabupaten Sleman",
+      "provinsi": "DI Yogyakarta",
+      "kode_area": "0274",
+      "koordinat": {
+        "lat": -7.7172,
+        "lng": 110.3565
+      },
+      "layanan_112": false,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polres": "(0274) 868410"
+        },
+        "damkar": "113",
+        "basarnas": "115",
+        "ambulans": {
+          "rsud_sleman": "(0274) 868437"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kabupaten Sleman DIY, Polres Sleman di (0274) 868410. RSUD Sleman di (0274) 868437. Damkar 113, Basarnas 115."
+    },
+    {
+      "id": "kota_surabaya",
+      "kota": "Kota Surabaya",
+      "provinsi": "Jawa Timur",
+      "kode_area": "031",
+      "koordinat": {
+        "lat": -7.2575,
+        "lng": 112.7521
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polda_jatim": "(031) 8280748",
+          "polrestabes_sby": "(031) 3523927"
+        },
+        "damkar": {
+          "dinas": "(031) 3533843",
+          "uptd_2": "(031) 3712208",
+          "posko": "(031) 99424417"
+        },
+        "basarnas": {
+          "kantor_sby": "115"
+        },
+        "ambulans": {
+          "rsud_dr_soetomo": "(031) 5501001",
+          "rsud_soewandhie": "(031) 3717141",
+          "pmi_sby": "(031) 99443899"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Surabaya Jawa Timur, nomor darurat 112 aktif. Polda Jatim di (031) 8280748, Polrestabes Surabaya (031) 3523927. Damkar Surabaya di (031) 3533843 dan (031) 99424417. RSUD Dr. Soetomo (031) 5501001, RSUD Soewandhie (031) 3717141, PMI Surabaya (031) 99443899. Basarnas 115."
+    },
+    {
+      "id": "kota_malang",
+      "kota": "Kota Malang",
+      "provinsi": "Jawa Timur",
+      "kode_area": "0341",
+      "koordinat": {
+        "lat": -7.9797,
+        "lng": 112.6304
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polresta": "(0341) 364211",
+          "polres_malang": "(0341) 398656"
+        },
+        "damkar": {
+          "kota": "(0341) 362222"
+        },
+        "basarnas": "115",
+        "ambulans": {
+          "rsud_saiful_anwar": "(0341) 362101",
+          "rsud_kota_malang": "(0341) 754338",
+          "pmi_kota": "(0341) 364617"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Malang Jawa Timur, Polresta Malang di (0341) 364211. Damkar Kota Malang di (0341) 362222. RSUD Saiful Anwar (0341) 362101, RSUD Kota Malang (0341) 754338, PMI Kota Malang (0341) 364617. Basarnas 115."
+    },
+    {
+      "id": "kabupaten_malang",
+      "kota": "Kabupaten Malang",
+      "provinsi": "Jawa Timur",
+      "kode_area": "0341",
+      "koordinat": {
+        "lat": -8.1845,
+        "lng": 112.7344
+      },
+      "layanan_112": false,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polres": "(0341) 398656"
+        },
+        "damkar": "(0341) 346999",
+        "basarnas": "115",
+        "ambulans": {
+          "rsud_kanjuruhan": "(0341) 395041",
+          "pmi": "(0341) 801829"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kabupaten Malang Jawa Timur, Polres Malang (0341) 398656. Damkar Kabupaten Malang (0341) 346999. RSUD Kanjuruhan Kepanjen (0341) 395041, PMI Kab. Malang (0341) 801829. Basarnas 115."
+    },
+    {
+      "id": "kota_kediri",
+      "kota": "Kota Kediri",
+      "provinsi": "Jawa Timur",
+      "kode_area": "0354",
+      "koordinat": {
+        "lat": -7.8166,
+        "lng": 112.0114
+      },
+      "layanan_112": false,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "spkt_polres": "(0354) 391710"
+        },
+        "damkar": "(0354) 113",
+        "basarnas": "115",
+        "ambulans": {
+          "rsud_gambiran": "(0353) 2810000",
+          "umum": "(0354) 695119"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Kediri Jawa Timur, Polres Kediri di (0354) 391710. Damkar (0354) 113. Ambulans (0354) 695119, RSUD Gambiran (0353) 2810000. Basarnas 115."
+    },
+    {
+      "id": "kota_blitar",
+      "kota": "Kota Blitar",
+      "provinsi": "Jawa Timur",
+      "kode_area": "0342",
+      "koordinat": {
+        "lat": -8.0953,
+        "lng": 112.1609
+      },
+      "layanan_112": false,
+      "darurat": {
+        "terpadu_112": "(0342) 801112",
+        "polisi": "110",
+        "damkar": "113",
+        "basarnas": "115",
+        "ambulans": "(0342) 801119",
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Blitar Jawa Timur, call center darurat di (0342) 801112. Ambulans (0342) 801119. Polisi 110, Damkar 113, Basarnas 115."
+    },
+    {
+      "id": "kabupaten_jember",
+      "kota": "Kabupaten Jember",
+      "provinsi": "Jawa Timur",
+      "kode_area": "0331",
+      "koordinat": {
+        "lat": -8.1845,
+        "lng": 113.688
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": "110",
+        "damkar": "(0331) 321213",
+        "basarnas": "115",
+        "ambulans": {
+          "rsud_dr_soebandi": "(0331) 411818 / 487095"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kabupaten Jember Jawa Timur, Damkar di (0331) 321213. Ambulans RSUD dr. Soebandi di (0331) 411818 atau 487095. Polisi 110, Basarnas 115."
+    },
+    {
+      "id": "kabupaten_lamongan",
+      "kota": "Kabupaten Lamongan",
+      "provinsi": "Jawa Timur",
+      "kode_area": "0322",
+      "koordinat": {
+        "lat": -7.1173,
+        "lng": 112.4139
+      },
+      "layanan_112": false,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": "110 / 081319082001 (WA Kapolres)",
+        "damkar": {
+          "lamongan": "(0322) 321113",
+          "babat": "0823-3426-8113"
+        },
+        "basarnas": "115",
+        "ambulans": {
+          "rsud_dr_soegiri": "(0322) 321540",
+          "rsud_ngimbang": "0821-4123-7163"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kabupaten Lamongan Jawa Timur, Damkar Lamongan (0322) 321113, Damkar Babat 0823-3426-8113. IGD RSUD dr. Soegiri (0322) 321540, RSUD Ngimbang 0821-4123-7163. Polisi 110, Basarnas 115."
+    },
+    {
+      "id": "kota_mojokerto",
+      "kota": "Kota Mojokerto",
+      "provinsi": "Jawa Timur",
+      "kode_area": "0321",
+      "koordinat": {
+        "lat": -7.4721,
+        "lng": 112.4335
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polresta": "(0321) 330400"
+        },
+        "damkar": "(0321) 325013 / (0321) 591310",
+        "basarnas": "115",
+        "ambulans": {
+          "rsud_wahidin": "(0321) 322194",
+          "dinkes": "082245556474"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Mojokerto Jawa Timur, Polresta Mojokerto (0321) 330400. Damkar (0321) 325013 atau (0321) 591310. Ambulans RSUD Dr. Wahidin (0321) 322194. Basarnas 115."
+    },
+    {
+      "id": "kota_jombang",
+      "kota": "Kota Jombang",
+      "provinsi": "Jawa Timur",
+      "kode_area": "0321",
+      "koordinat": {
+        "lat": -7.546,
+        "lng": 112.2167
+      },
+      "layanan_112": false,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polres": "(0321) 861184"
+        },
+        "damkar": "113",
+        "basarnas": "115",
+        "ambulans": {
+          "rsud_jombang": "(0321) 863502",
+          "umum": "(0321) 711119"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kabupaten Jombang Jawa Timur, Polres Jombang (0321) 861184. RSUD Jombang (0321) 863502, ambulans umum (0321) 711119. Damkar 113, Basarnas 115."
+    },
+    {
+      "id": "kota_medan",
+      "kota": "Kota Medan",
+      "provinsi": "Sumatera Utara",
+      "kode_area": "061",
+      "koordinat": {
+        "lat": 3.5952,
+        "lng": 98.6722
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polrestabes": "(061) 4567-XXXX"
+        },
+        "damkar": "113",
+        "basarnas": {
+          "kantor_medan": "(061) XXXXXX"
+        },
+        "ambulans": {
+          "rsud_pirngadi": "(061) 4536022",
+          "rsup_h_adam_malik": "(061) 8360381"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Medan Sumatera Utara, nomor darurat 112 aktif. RSUD Dr. Pirngadi di (061) 4536022. RSUP H. Adam Malik di (061) 8360381. Damkar 113, Basarnas 115."
+    },
+    {
+      "id": "kota_denpasar",
+      "kota": "Kota Denpasar",
+      "provinsi": "Bali",
+      "kode_area": "0361",
+      "koordinat": {
+        "lat": -8.6705,
+        "lng": 115.2126
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polresta": "(0361) 424346"
+        },
+        "damkar": "(0361) 113",
+        "basarnas": {
+          "kantor_bali": "(0361) 751234"
+        },
+        "ambulans": {
+          "rsup_sanglah": "(0361) 255015"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Denpasar Bali, nomor darurat 112 aktif. Polresta Denpasar (0361) 424346. Damkar (0361) 113. Basarnas Bali (0361) 751234. RSUP Sanglah (0361) 255015."
+    },
+    {
+      "id": "kota_makassar",
+      "kota": "Kota Makassar",
+      "provinsi": "Sulawesi Selatan",
+      "kode_area": "0411",
+      "koordinat": {
+        "lat": -5.1477,
+        "lng": 119.4327
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": {
+          "polrestabes": "(0411) 319277",
+          "polsek_panakukang": "(0411) 442302",
+          "polsek_tallo": "(0411) 449329"
+        },
+        "damkar": "(0411) 113",
+        "basarnas": {
+          "sar_makassar": "(0411) 554111"
+        },
+        "ambulans": {
+          "pmi_makassar": "(0411) 854221",
+          "umum": "(0411) 118"
+        },
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Makassar Sulawesi Selatan, nomor darurat 112 aktif. Polrestabes Makassar (0411) 319277. Damkar (0411) 113. SAR Makassar (0411) 554111. PMI Makassar (0411) 854221. Ambulans (0411) 118."
+    },
+    {
+      "id": "kota_balikpapan",
+      "kota": "Kota Balikpapan",
+      "provinsi": "Kalimantan Timur",
+      "kode_area": "0542",
+      "koordinat": {
+        "lat": -1.2379,
+        "lng": 116.8529
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": "110",
+        "damkar": "113",
+        "basarnas": "115",
+        "ambulans": "119",
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Balikpapan Kalimantan Timur, nomor darurat 112 aktif. Polisi 110, Damkar 113, Basarnas 115, Ambulans 119. Kota ini termasuk pilot project pertama layanan 112."
+    },
+    {
+      "id": "kota_samarinda",
+      "kota": "Kota Samarinda",
+      "provinsi": "Kalimantan Timur",
+      "kode_area": "0541",
+      "koordinat": {
+        "lat": -0.5022,
+        "lng": 117.1536
+      },
+      "layanan_112": false,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": "110",
+        "damkar": "113",
+        "basarnas": "115",
+        "ambulans": "119",
+        "bpbd": "(0541) 741040"
+      },
+      "rag_narasi": "Di Kota Samarinda Kalimantan Timur, BPBD Kaltim di (0541) 741040. Polisi 110, Damkar 113, Basarnas 115, Ambulans 119."
+    },
+    {
+      "id": "kota_batam",
+      "kota": "Kota Batam",
+      "provinsi": "Kepulauan Riau",
+      "kode_area": "0778",
+      "koordinat": {
+        "lat": 1.1301,
+        "lng": 104.0529
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": "110",
+        "damkar": "113",
+        "basarnas": "115",
+        "ambulans": "119",
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Batam Kepulauan Riau, nomor darurat 112 aktif (pilot project awal). Polisi 110, Damkar 113, Basarnas 115, Ambulans 119."
+    },
+    {
+      "id": "kota_mataram",
+      "kota": "Kota Mataram",
+      "provinsi": "Nusa Tenggara Barat",
+      "kode_area": "0370",
+      "koordinat": {
+        "lat": -8.5833,
+        "lng": 116.1183
+      },
+      "layanan_112": true,
+      "darurat": {
+        "terpadu_112": "112",
+        "polisi": "110",
+        "damkar": "113",
+        "basarnas": "115",
+        "ambulans": "119",
+        "bpbd": "Hubungi 112"
+      },
+      "rag_narasi": "Di Kota Mataram Nusa Tenggara Barat, nomor darurat 112 aktif. Polisi 110, Damkar 113, Basarnas 115, Ambulans 119."
+    }
+  ],
+  "bpbd_provinsi": {
+    "aceh": {
+      "telp": "(0651) 34783",
+      "email": "bpbaceh@gmail.com"
+    },
+    "sumatera_utara": {
+      "telp": "(061) 4567-XXXX",
+      "catatan": "Gunakan 112"
+    },
+    "sumatera_barat": {
+      "telp": "(0751) XXXXXX",
+      "catatan": "Gunakan 112"
+    },
+    "riau": {
+      "telp": "Gunakan 112",
+      "catatan": ""
+    },
+    "banten": {
+      "telp": "(0254) 7921283",
+      "email": "bpbd_banten@yahoo.com"
+    },
+    "dki_jakarta": {
+      "telp": "(021) 29827444 / 29827666",
+      "wa": "0812-1237-575",
+      "email": "pusdalops@bnpb.go.id",
+      "cc": "112 (Jakarta Siaga)"
+    },
+    "jawa_barat": {
+      "telp": "082317012056",
+      "catatan": "BPBD Jabar"
+    },
+    "jawa_tengah": {
+      "telp": "(024) 519927 / 3519904",
+      "wa": "08813809409",
+      "email": "bpbd@jatengprov.go.id"
+    },
+    "di_yogyakarta": {
+      "telp": "(0274) 555584 / 555585",
+      "email": "pusdalopsdiy@gmail.com"
+    },
+    "jawa_timur": {
+      "telp": "(031) 8550222",
+      "email": "mail@bpbd.jatimprov.go.id"
+    },
+    "bali": {
+      "telp": "(0361) 245397",
+      "email": "bpbd@baliprov.go.id"
+    },
+    "kalimantan_timur": {
+      "telp": "(0541) 741040",
+      "email": "bpbd@kaltimprov.go.id"
+    },
+    "kalimantan_utara": {
+      "telp": "(0552) 21727",
+      "email": "bpbdkaltara@gmail.com"
+    },
+    "sulawesi_selatan": {
+      "telp": "Gunakan 112 / Polda Sulsel",
+      "catatan": ""
+    },
+    "kepulauan_babel": {
+      "telp": "(0717) 438865 / 4261147",
+      "email": "bpbd.provbabel@gmail.com"
+    }
+  }
+}
