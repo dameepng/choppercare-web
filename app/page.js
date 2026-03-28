@@ -88,6 +88,7 @@ export default function Home() {
 
       let assistantContent = "";
       let firstToken = true;
+      let handledTerminalState = false;
 
       try {
         const res = await fetch(`${API_URL}/api/chat`, {
@@ -95,6 +96,14 @@ export default function Home() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message: userMessage, session_id: sessionId }),
         });
+
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+
+        if (!res.body) {
+          throw new Error("Empty response body");
+        }
 
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
@@ -109,6 +118,18 @@ export default function Home() {
           for (const line of lines) {
             try {
               const data = JSON.parse(line.slice(6));
+              if (data.error && !handledTerminalState) {
+                handledTerminalState = true;
+                setIsTyping(false);
+                setMessages((prev) => [
+                  ...prev,
+                  {
+                    role: "assistant",
+                    content: data.error,
+                  },
+                ]);
+                break;
+              }
               if (data.token) {
                 if (firstToken) {
                   setIsTyping(false);
@@ -142,6 +163,18 @@ export default function Home() {
               }
             } catch {}
           }
+
+          if (handledTerminalState) break;
+        }
+
+        if (!handledTerminalState && !assistantContent) {
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: "assistant",
+              content: "Belum ada jawaban yang bisa ditampilkan. Coba kirim ulang pertanyaannya.",
+            },
+          ]);
         }
       } catch {
         setIsTyping(false);
