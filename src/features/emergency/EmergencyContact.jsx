@@ -12,7 +12,14 @@ import {
 import { useEmergencyLocation } from "./useEmergencyLocation";
 
 export default function EmergencyContact() {
-  const { status, coordinates, cityName, error, requestPermission } =
+  const {
+    status,
+    coordinates,
+    cityName,
+    error,
+    restoredFromCache,
+    requestPermission,
+  } =
     useEmergencyLocation();
   const [isExpanded, setIsExpanded] = useState(true);
 
@@ -80,6 +87,12 @@ export default function EmergencyContact() {
       cancelled = true;
     };
   }, [coordinates, status]);
+
+  useEffect(() => {
+    if (restoredFromCache) {
+      setIsExpanded(false);
+    }
+  }, [restoredFromCache]);
 
   if (!isExpanded) {
     return (

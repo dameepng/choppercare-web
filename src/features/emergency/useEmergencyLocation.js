@@ -69,6 +69,7 @@ export function useEmergencyLocation() {
   const [coordinates, setCoordinates] = useState(null);
   const [cityName, setCityName] = useState(null);
   const [error, setError] = useState(null);
+  const [restoredFromCache, setRestoredFromCache] = useState(false);
 
   useEffect(() => {
     const cached = readCachedLocation();
@@ -80,6 +81,7 @@ export function useEmergencyLocation() {
     setCoordinates(cached.coordinates);
     setCityName(cached.cityName || null);
     setStatus("success");
+    setRestoredFromCache(true);
   }, []);
 
   const requestPermission = () => {
@@ -91,6 +93,7 @@ export function useEmergencyLocation() {
 
     setStatus("loading");
     setError(null);
+    setRestoredFromCache(false);
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -149,6 +152,7 @@ export function useEmergencyLocation() {
     coordinates,
     cityName,
     error,
+    restoredFromCache,
     requestPermission,
   };
 }
