@@ -135,18 +135,31 @@
       },
       "layanan_112": true,
       "darurat": {
-        "terpadu_112": "112",
+        "terpadu_112": {
+          "call_center": "112",
+          "whatsapp_tangsel_siaga": "081380201112"
+        },
         "polisi": {
           "polresta_tangsel": "110"
         },
         "damkar": {
-          "pusat": "113"
+          "call_center_tangsel": "112",
+          "markas_damkar": "0811-9000-74",
+          "nasional": "113"
         },
         "basarnas": "115",
-        "ambulans": "119",
-        "bpbd": "Hubungi 112"
+        "ambulans": {
+          "spgdt_nasional": "119",
+          "dinkes_tangsel": "(021) 29307897",
+          "rsud_serpong_utara": "(021) 53136895",
+          "rsud_pondok_aren": "081389260635"
+        },
+        "bpbd": {
+          "call_center_tangsel": "112",
+          "kantor_bpbd": "(021) 29422479"
+        }
       },
-      "rag_narasi": "Di Kota Tangerang Selatan (Tangsel) Banten, gunakan nomor darurat terpadu 112. Polisi 110, Damkar 113, Basarnas 115, Ambulans 119."
+      "rag_narasi": "Di Kota Tangerang Selatan (Tangsel) Banten, gunakan nomor darurat terpadu 112. BPBD Tangsel juga mempublikasikan WhatsApp Tangsel Siaga di 081380201112 dan telepon kantor BPBD di (021) 29422479. Untuk pemadam kebakaran, warga juga dipublikasikan untuk menyimpan nomor Damkar Tangsel 0811-9000-74 selain 112 dan 113. Untuk layanan kesehatan, gunakan 119, Dinkes Tangsel di (021) 29307897, RSUD Serpong Utara di (021) 53136895, atau RSUD Pondok Aren di 081389260635. Untuk kepolisian gunakan 110 dan Basarnas 115."
     },
     {
       "id": "kabupaten_bogor",
